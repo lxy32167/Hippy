@@ -24,6 +24,18 @@
       },
       "TS6200": {
         "logLevel": "none"
+      },
+      "TS2300": {
+        "logLevel": "none"
+      },
+      "TS2451": {
+        "logLevel": "none"
+      },
+      "TS2717": {
+        "logLevel": "none"
+      },
+      "TS2649": {
+        "logLevel": "none"
       }
     },
     "extractorMessageReporting": {

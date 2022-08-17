@@ -1,9 +1,5 @@
 lockfileVersion: 5.4
 
-overrides:
-  vue-template-compiler: 2.6.14
-  vue@^2: 2.6.14
-
 importers:
 
   .:
@@ -72,7 +68,7 @@ importers:
       ttypescript: ^1.5.13
       typescript: ^4.6.3
       typescript-transform-paths: ^3.3.1
-      vue: 2.6.14
+      vue: ^2.6.14
       watch: ^0.13.0
     devDependencies:
       '@babel/core': 7.18.10
@@ -234,8 +230,8 @@ importers:
       minimist: ^1.2.6
       null-loader: ^0.1.1
       postcss: ^8.4.5
-      vue: 2.6.14
-      vue-template-compiler: 2.6.14
+      vue: ^2.5.16
+      vue-template-compiler: ^2.5.16
       webpack: ^4.1.0
     dependencies:
       '@vue/component-compiler-utils': 3.3.0

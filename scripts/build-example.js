@@ -28,7 +28,7 @@ const {
   test,
 } = require('shelljs');
 
-const cmdExample = 'please execute command like \'npm run buildexample hippy-react-demo\' or \'npm run buildexample hippy-vue-demo|hippy-vue-next-demo\'';
+const cmdExample = 'please execute command like \'pnpm run buildexample hippy-react-demo\' or \'pnpm run buildexample hippy-vue-demo|hippy-vue-next-demo\'';
 const example = process.argv[2];
 if (!example) {
   console.error(`❌ No example argument found, ${cmdExample}.`);
@@ -48,11 +48,11 @@ pushd(DEMO_PATH);
 
 const execOptions = { stdio: 'inherit' };
 console.log(`1/3 Start to install ${example} dependencies.`);
-exec('npm install --legacy-peer-deps', execOptions);
+exec('pnpm install', execOptions);
 
 console.log(`2/3 Start to build project ${example}.`);
-exec('npm run hippy:vendor', execOptions); // Build vendor js
-exec('npm run hippy:build', execOptions); // Build index js
+exec('pnpm run hippy:vendor', execOptions); // Build vendor js
+exec('pnpm run hippy:build', execOptions); // Build index js
 
 console.log('3/3 Copy the built files to native.');
 cp('-Rf', './dist/ios/*', '../ios-demo/res/'); // Update the ios demo project

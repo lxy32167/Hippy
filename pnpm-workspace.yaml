@@ -1,5 +1,2 @@
 packages:
   - 'packages/**'
-  - 'examples/hippy-react-demo'
-  - 'examples/hippy-vue-demo'
-  - 'examples/hippy-vue-next-demo'

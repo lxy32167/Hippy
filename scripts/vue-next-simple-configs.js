@@ -110,7 +110,7 @@ function genConfig(name) {
         },
       }),
       typescript({
-        typescript: require('typescript'),
+        typescript: require('ttypescript'),
         tsconfigDefaults: {
           compilerOptions: {
             plugins: [

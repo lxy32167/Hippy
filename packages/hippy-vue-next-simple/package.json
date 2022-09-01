@@ -1,7 +1,7 @@
 {
-  "name": "@hippy/vue-next",
+  "name": "@hippy/vue-next-simple",
   "version": "unspecified",
-  "description": "Vue-Next binding for Hippy native framework",
+  "description": "Simple Vue-Next binding for Hippy native framework",
   "author": "OpenHippy Team",
   "homepage": "https://hippyjs.org",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "hippy",
-    "hippy-vue-next",
+    "hippy-vue-next-simple",
     "native",
     "web",
     "framework",

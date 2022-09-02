@@ -1,3 +1,7 @@
+import { Native } from './runtime/native';
+import { setRootViewId } from './util';
+import { renderToNative } from './runtime/render';
+
 // 终端节点 props 类型
 export interface NativeNodeProps {
   [key: string]: any;
@@ -23,3 +27,34 @@ export enum NodeOperateType {
   UPDATE,
   DELETE,
 }
+
+/**
+ * 创建Hippy App的参数类型
+ *
+ * @public
+ */
+export interface HippyAppOptions {
+  // Hippy终端注册的app名称
+  appName: string;
+}
+
+/**
+ * 创建 hippy app
+ */
+export const createApp = (options: HippyAppOptions) => new Promise((resolve) => {
+  Native.hippyRegister.regist(options.appName, (superProps: any) => {
+    const { __instanceId__: rootViewId } = superProps;
+    // 缓存 native root view id
+    setRootViewId(rootViewId);
+
+    resolve({
+      rootViewId,
+      superProps,
+    });
+  });
+});
+
+// 导出 native 渲染接口
+export {
+  renderToNative,
+};

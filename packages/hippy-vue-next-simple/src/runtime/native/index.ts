@@ -2,6 +2,7 @@
  * 提供全局 API
  */
 const {
+  bridge: { callNative, callNativeWithPromise },
   // device info
   device: {
     platform: {
@@ -15,6 +16,8 @@ const {
 } = global.Hippy;
 
 export const Native = {
+  callNative,
+  callNativeWithPromise,
   hippyDocument,
   hippyRegister,
   platform,

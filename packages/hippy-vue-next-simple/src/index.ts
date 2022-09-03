@@ -1,6 +1,7 @@
 import { Native } from './runtime/native';
 import { setRootViewId } from './util';
 import { renderToNative } from './runtime/render';
+import './runtime/websocket';
 
 // 终端节点 props 类型
 export interface NativeNodeProps {

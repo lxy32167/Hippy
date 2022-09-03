@@ -3,7 +3,8 @@ import { createApp, type NativeNode, NodeOperateType, renderToNative } from '@hi
 // 创建APP
 createApp({
   appName: 'Demo',
-}).then(({ rootViewId }) => {
+}).then(({ rootViewId, superProps }) => {
+  console.log('received: ', rootViewId, superProps);
   const nativeNodeOne = {
     id: 1,
     pId: rootViewId,
@@ -39,15 +40,4 @@ createApp({
   ];
   // 插入节点
   renderToNative(insertNodes, NodeOperateType.CREATE);
-
-  setTimeout(() => {
-    // 更新节点
-    nativeNodeThree.props.text = 'HelloWorld3';
-    renderToNative([nativeNodeThree], NodeOperateType.UPDATE);
-
-    setTimeout(() => {
-      // 删除节点
-      renderToNative([nativeNodeThree], NodeOperateType.DELETE);
-    }, 5000);
-  }, 5000);
 });

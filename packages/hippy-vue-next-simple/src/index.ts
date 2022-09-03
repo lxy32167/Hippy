@@ -41,7 +41,10 @@ export interface HippyAppOptions {
 /**
  * 创建 hippy app
  */
-export const createApp = (options: HippyAppOptions) => new Promise((resolve) => {
+export const createApp = (options: HippyAppOptions): Promise<{
+  rootViewId: number;
+  superProps: any;
+}> => new Promise((resolve) => {
   Native.hippyRegister.regist(options.appName, (superProps: any) => {
     const { __instanceId__: rootViewId } = superProps;
     // 缓存 native root view id

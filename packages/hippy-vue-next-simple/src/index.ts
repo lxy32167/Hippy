@@ -2,6 +2,9 @@ import { Native } from './runtime/native';
 import { setRootViewId } from './util';
 import { renderToNative } from './runtime/render';
 import './runtime/websocket';
+import { HippyDocument } from './runtime/document/hippy-document';
+import { HippyElement } from './runtime/element/hippy-element';
+import { HippyNode, NodeType } from './runtime/node/hippy-node';
 
 // 终端节点 props 类型
 export interface NativeNodeProps {
@@ -61,4 +64,8 @@ export const createApp = (options: HippyAppOptions): Promise<{
 // 导出 native 渲染接口
 export {
   renderToNative,
+  HippyNode,
+  NodeType,
+  HippyElement,
+  HippyDocument,
 };

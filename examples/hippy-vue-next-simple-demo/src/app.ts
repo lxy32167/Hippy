@@ -1,4 +1,4 @@
-import { createApp, type NativeNode, NodeOperateType, renderToNative } from '@hippy/vue-next-simple';
+import { createApp, type NativeNode, NodeOperateType, renderToNative, HippyDocument, HippyElement } from '@hippy/vue-next-simple';
 
 // 创建APP
 createApp({
@@ -39,5 +39,37 @@ createApp({
     nativeNodeThree,
   ];
   // 插入节点
-  renderToNative(insertNodes, NodeOperateType.CREATE);
+  // renderToNative(insertNodes, NodeOperateType.CREATE);
+
+  // setTimeout(() => {
+  //   // 更新节点
+  //   nativeNodeThree.props.text = 'HelloWorld3';
+  //   renderToNative([nativeNodeThree], NodeOperateType.UPDATE);
+  //
+  //   setTimeout(() => {
+  //     // 删除节点
+  //     renderToNative([nativeNodeThree], NodeOperateType.DELETE);
+  //   }, 5000);
+  // }, 5000);
+
+  const root = HippyDocument.createElement('span');
+  root.setAttribute('text', 'Hello1');
+  root.setAttribute('marginTop', 100);
+
+  const childNodeOne = HippyDocument.createElement('span');
+  childNodeOne.setAttribute('text', 'Hello2');
+
+  const childNodeTwo = HippyDocument.createElement('span');
+  childNodeTwo.setAttribute('text', 'Hello3');
+
+  root.appendChild(childNodeOne);
+  root.appendChild(childNodeTwo);
+
+  setTimeout(() => {
+    childNodeTwo.setAttribute('text', 'World!');
+
+    setTimeout(() => {
+      root.removeChild(childNodeOne);
+    }, 5000);
+  }, 5000);
 });

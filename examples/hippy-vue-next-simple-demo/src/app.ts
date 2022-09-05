@@ -12,6 +12,7 @@ createApp({
     name: 'Text',
     props: {
       text: 'Hello1',
+      marginTop: 100,
     },
   };
   const nativeNodeTwo = {

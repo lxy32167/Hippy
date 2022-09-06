@@ -55,7 +55,8 @@ const EventDispatcher = {
     const targetEventName = getVueEventName(eventName);
     const event = new HippyEvent(targetEventName);
 
-    // targetNode.dispatchEvent(event);
+    // 下发事件
+    targetNode.dispatchEvent(event);
   },
 
   /**

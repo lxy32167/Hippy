@@ -1,3 +1,5 @@
+import { HippyEventTarget } from '../event/event-target';
+import { HippyEvent } from '../event/hippy-event';
 import { type NativeNode, NodeOperateType } from '../../index';
 import { DEFAULT_ROOT_ID, generateUniqueId, getRootViewId } from '../../util';
 import { renderToNative } from '../render';
@@ -9,7 +11,7 @@ export enum NodeType {
   DocumentNode,
 }
 
-export class HippyNode {
+export class HippyNode extends HippyEventTarget {
   /**
    * 获取节点唯一 id
    *
@@ -33,6 +35,8 @@ export class HippyNode {
   public isNeedInsertToNative: boolean;
 
   constructor(nodeType: NodeType) {
+    super();
+
     this.nodeType = nodeType;
 
     this.nodeId = HippyNode.getUniqueNodeId();
@@ -269,6 +273,26 @@ export class HippyNode {
     if (child.isMounted) {
       child.isMounted = false;
       renderToNative(child.convertToNativeNodes(false), NodeOperateType.DELETE);
+    }
+  }
+
+  public dispatchEvent(event: HippyEvent) {
+    const listeners = this.listeners[event.type];
+
+    event.currentTarget = this;
+
+    if (!event.target) {
+      event.target = this;
+    }
+
+    if (listeners.length) {
+      for (let i = listeners.length - 1; i >= 0; i--) {
+        listeners[i](event);
+      }
+    }
+
+    if (this.parentNode && event.bubbles) {
+      this.parentNode.dispatchEvent(event);
     }
   }
 }

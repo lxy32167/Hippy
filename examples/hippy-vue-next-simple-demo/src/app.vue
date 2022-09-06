@@ -3,8 +3,14 @@
     v-if="msg"
     id="p"
   >
-    <span id="span1">{{ msg }}</span>
-    <span id="span2">{{ msg2 }}</span>
+    <span
+      id="span1"
+      @click="onClickMsgOne"
+    >{{ msg }}</span>
+    <span
+      id="span2"
+      @click="onClickMsgTwo"
+    >{{ msg2 }}</span>
   </p>
 </template>
 <script lang="ts">
@@ -15,16 +21,18 @@ export default defineComponent({
     const msg = ref('Hello');
     const msg2 = ref('-World!');
 
-    setTimeout(() => {
+    const onClickMsgOne = () => {
       msg.value = 'ByeBye';
-      setTimeout(() => {
-        msg.value = '';
-      }, 5000);
-    }, 5000);
+    };
+    const onClickMsgTwo = () => {
+      msg.value = '';
+    };
 
     return {
       msg,
       msg2,
+      onClickMsgOne,
+      onClickMsgTwo,
     };
   },
 });

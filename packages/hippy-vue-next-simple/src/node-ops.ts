@@ -1,12 +1,15 @@
 import { HippyDocument } from './runtime/document/hippy-document';
 import { HippyNode } from './runtime/node/hippy-node';
 
-function insert(el: HippyNode, parent: HippyNode, anchor?: HippyNode | null): void {
-
+function insert(el: HippyNode, parent: HippyNode, anchor: HippyNode | null): void {
+  parent.insertBefore(el, anchor);
 }
 
 function remove(el: HippyNode): void {
-
+  const { parentNode } = el;
+  if (parentNode) {
+    parentNode?.removeChild(el);
+  }
 }
 
 function createElement(type: string) {
@@ -21,12 +24,12 @@ function createComment(text: string) {
   return HippyDocument.createElement(text);
 }
 
-function setText() {
-
+function setText(el, text) {
+  el.setAttribute('text', text);
 }
 
-function setElementText() {
-
+function setElementText(el, text) {
+  el.setAttribute('text', text);
 }
 
 function parentNode(node: HippyNode): HippyNode | null {

@@ -146,12 +146,17 @@ export class HippyNode {
     this.insertNativeNode(child);
   }
 
+  /**
+   * 遍历每个节点（包括全部子节点）并执行回调
+   *
+   * @param callback
+   */
   public eachNode(callback: Function) {
     if (callback) {
       callback(this);
 
       this.childNodes.forEach((childNode) => {
-        callback(childNode);
+        this.eachNode.call(childNode, callback);
       });
     }
   }
@@ -208,11 +213,11 @@ export class HippyNode {
     const renderRootNodeCondition = this.isRootNode() && !this.isMounted;
     // 否则子节点上屏
     const renderOtherNodeCondition = this.isMounted && !child.isMounted;
-
     if (renderRootNodeCondition || renderOtherNodeCondition) {
       const parentNode = renderRootNodeCondition ? this : child;
+      const nativeNodes = parentNode.convertToNativeNodes(true);
 
-      renderToNative(parentNode.convertToNativeNodes(true), NodeOperateType.CREATE);
+      renderToNative(nativeNodes, NodeOperateType.CREATE);
 
       // 上屏后将节点标记为已上屏
       parentNode.eachNode((node) => {

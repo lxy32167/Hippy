@@ -10,6 +10,15 @@ export function getRootViewId(): number {
   return rootViewId;
 }
 
+let hippyInstance;
+export function setHippyCachedInstance(instance) {
+  hippyInstance = instance;
+}
+
+export function getHippyCachedInstance() {
+  return hippyInstance;
+}
+
 export function trace(...args) {
   console.log(...args);
 }

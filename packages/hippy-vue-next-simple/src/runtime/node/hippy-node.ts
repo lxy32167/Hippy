@@ -146,6 +146,24 @@ export class HippyNode {
     this.insertNativeNode(child);
   }
 
+  public findChild(condition) {
+    const ret = condition(this);
+    if (ret) {
+      return this;
+    }
+
+    if (this.childNodes.length) {
+      for (const childNode of this.childNodes) {
+        const targetChild = this.findChild.call(childNode, condition);
+        if (targetChild) {
+          return targetChild;
+        }
+      }
+    }
+
+    return null;
+  }
+
   /**
    * 遍历每个节点（包括全部子节点）并执行回调
    *

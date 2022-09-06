@@ -1,6 +1,6 @@
 import { createRenderer, type App, type Component } from '@vue/runtime-core';
 import { Native } from './runtime/native';
-import { setRootViewId } from './util';
+import { setRootViewId, setHippyCachedInstance } from './util';
 import { renderToNative } from './runtime/render';
 import './runtime/websocket';
 import { HippyDocument } from './runtime/document/hippy-document';
@@ -66,7 +66,10 @@ export const createApp = (vueRootComponent: Component, options: HippyAppOptions)
     const root = HippyDocument.createElement(rootContainer);
     root.setAttribute('marginTop', 100);
 
-    return mount(root, isHydrate, isSVG);
+    const instance = mount(root, isHydrate, isSVG);
+    setHippyCachedInstance(instance);
+
+    return instance;
   };
 
   // hippy 实例启动方法

@@ -3,8 +3,10 @@
     v-if="msg"
     id="p"
   >
-    <span id="span1">{{ msg }}</span>
-    <span id="span2">{{ msg2 }}</span>
+    <span>
+      <span>{{ msg }}</span>
+    </span>
+    <span>{{ msg2 }}</span>
   </p>
 </template>
 <script lang="ts">

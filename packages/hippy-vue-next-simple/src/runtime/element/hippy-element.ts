@@ -62,6 +62,12 @@ export class HippyElement extends HippyNode {
     return nativeEvents;
   }
 
+  public getNativeStyles() {
+    const nativeStyle = {};
+
+    return nativeStyle;
+  }
+
   public convertToNativeNodes(isIncludeChild: boolean): Array<NativeNode> {
     if (!this.isNeedInsertToNative) {
       return [];
@@ -78,6 +84,7 @@ export class HippyElement extends HippyNode {
       props: {
         ...this.getNativeProps(),
         ...this.getNativeEvents(),
+        ...this.getNativeStyles(),
       },
     };
 

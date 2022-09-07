@@ -37,3 +37,8 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+#span1 {
+  color: #2d6feb;
+}
+</style>

@@ -10,6 +10,15 @@ export function getRootViewId(): number {
   return rootViewId;
 }
 
+let hippyInstance;
+export function setHippyCachedInstance(instance) {
+  hippyInstance = instance;
+}
+
+export function getHippyCachedInstance() {
+  return hippyInstance;
+}
+
 export function trace(...args) {
   console.log(...args);
 }
@@ -25,4 +34,21 @@ export function warn(...args) {
  */
 export function getNormalizeEventName(name: string): string {
   return `on${capitalize(name)}`;
+}
+
+// 根节点id
+export const DEFAULT_ROOT_ID = 1;
+let uniqueId = 0;
+export function generateUniqueId(): number {
+  uniqueId += 1;
+  // 模10为0的id是native自己使用的
+  if (uniqueId % 10 === 0) {
+    uniqueId += 1;
+  }
+
+  return uniqueId;
+}
+
+export function getBeforeLoadStyle() {
+  return v => v;
 }

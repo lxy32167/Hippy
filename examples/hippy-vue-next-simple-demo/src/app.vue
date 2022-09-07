@@ -8,7 +8,7 @@
       @click="onClickMsgOne"
     >{{ msg }}</span>
     <span
-      id="span2"
+      class="span2"
       @click="onClickMsgTwo"
     >{{ msg2 }}</span>
   </p>
@@ -38,7 +38,13 @@ export default defineComponent({
 });
 </script>
 <style>
+span {
+  font-size: 24px;
+}
 #span1 {
   color: #2d6feb;
+}
+.span2 {
+  color: #000088;
 }
 </style>

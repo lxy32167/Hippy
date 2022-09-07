@@ -1,5 +1,7 @@
+import { toRaw } from '@vue/runtime-core';
 import { type NativeNode, type NativeNodeProps } from '../../index';
 import { HippyNode, NodeType } from '../node/hippy-node';
+import { getCssMap } from '../style/css-map';
 
 export class HippyElement extends HippyNode {
   // 元素id
@@ -10,11 +12,19 @@ export class HippyElement extends HippyNode {
   public attributes: {
     [key: string]: any;
   } = {};
+  // class属性，例如 class="wrapper red" => ['wrapper', 'red']
+  public classList: Set<string>;
+  // 样式属性
+  public style: {
+    [key: string]: any;
+  };
 
   constructor(tagName: string) {
     super(NodeType.ElementNode);
 
     this.tagName = tagName;
+    this.classList = new Set();
+    this.style = {};
   }
 
   public getAttribute(key) {
@@ -27,7 +37,17 @@ export class HippyElement extends HippyNode {
 
   public setAttribute(key, value) {
     if (this.attributes[key] !== value) {
-      this.attributes[key] = value;
+      switch (key) {
+        case 'id':
+          this.id = value;
+          break;
+        case 'class':
+          this.classList = new Set(value.split(' ').filter((x: string) => x.trim()) as string);
+          break;
+        default:
+          this.attributes[key] = value;
+          break;
+      }
 
       this.updateNativeNode(false);
     }
@@ -42,7 +62,8 @@ export class HippyElement extends HippyNode {
 
     const keys = Object.keys(this.attributes);
     keys.forEach((key) => {
-      props[key] = this.attributes[key];
+      // vue 属性如果用了响应式，拿到的是Proxy对象，协议转换不识别，需要 toRaw 转为原始 js 类型
+      props[key] = toRaw(this.attributes[key]);
     });
 
     return props;
@@ -65,7 +86,23 @@ export class HippyElement extends HippyNode {
   public getNativeStyles() {
     const nativeStyle = {};
 
-    return nativeStyle;
+    const cssMap = getCssMap();
+    const matchedSelectors = cssMap.query(this);
+    matchedSelectors.selectors.forEach((matchedSelector) => {
+      // 如果匹配到的规则里有样式，则加入元素样式属性
+      if (matchedSelector.ruleSet?.declarations?.length) {
+        matchedSelector.ruleSet.declarations.forEach((cssStyle) => {
+          if (cssStyle) {
+            nativeStyle[cssStyle.property] = cssStyle.value;
+          }
+        });
+      }
+    });
+
+    // 内联样式处理，类似props，不写了
+    const inlineStyle = {};
+    // 合并样式表样式和内联样式，内联样式优先
+    return { ...nativeStyle, ...inlineStyle };
   }
 
   public convertToNativeNodes(isIncludeChild: boolean): Array<NativeNode> {
@@ -84,7 +121,8 @@ export class HippyElement extends HippyNode {
       props: {
         ...this.getNativeProps(),
         ...this.getNativeEvents(),
-        ...this.getNativeStyles(),
+        // hippy的js处理会将style属性展开并赋值给props
+        style: this.getNativeStyles(),
       },
     };
 

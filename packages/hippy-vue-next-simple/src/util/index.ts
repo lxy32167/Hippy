@@ -48,3 +48,7 @@ export function generateUniqueId(): number {
 
   return uniqueId;
 }
+
+export function getBeforeLoadStyle() {
+  return v => v;
+}

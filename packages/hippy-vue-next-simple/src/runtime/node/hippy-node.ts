@@ -285,7 +285,7 @@ export class HippyNode extends HippyEventTarget {
       event.target = this;
     }
 
-    if (listeners.length) {
+    if (listeners?.length) {
       for (let i = listeners.length - 1; i >= 0; i--) {
         listeners[i](event);
       }

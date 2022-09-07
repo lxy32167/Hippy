@@ -48,6 +48,20 @@ export class HippyElement extends HippyNode {
     return props;
   }
 
+  public getNativeEvents() {
+    const nativeEvents = {};
+    const listeners = this.getEventListeners();
+
+    Object.keys(listeners).forEach((eventName) => {
+      if (listeners[eventName]) {
+        // 告知终端监听该事件
+        nativeEvents[eventName] = true;
+      }
+    });
+
+    return nativeEvents;
+  }
+
   public convertToNativeNodes(isIncludeChild: boolean): Array<NativeNode> {
     if (!this.isNeedInsertToNative) {
       return [];
@@ -63,6 +77,7 @@ export class HippyElement extends HippyNode {
       name: 'Text',
       props: {
         ...this.getNativeProps(),
+        ...this.getNativeEvents(),
       },
     };
 

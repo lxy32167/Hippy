@@ -4,7 +4,7 @@
 import { HippyEvent } from './hippy-event';
 
 export abstract class HippyEventTarget {
-  public listeners: {
+  protected listeners: {
     [key: string]: Array<Function>;
   } = {};
 
@@ -31,6 +31,10 @@ export abstract class HippyEventTarget {
     } else {
       delete this.listeners[event];
     }
+  }
+
+  public getEventListeners() {
+    return this.listeners;
   }
 
   public abstract dispatchEvent(event: HippyEvent);

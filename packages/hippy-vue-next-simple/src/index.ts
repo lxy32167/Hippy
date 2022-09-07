@@ -8,6 +8,7 @@ import { HippyElement } from './runtime/element/hippy-element';
 import { HippyNode, NodeType } from './runtime/node/hippy-node';
 import { nodeOps } from './node-ops';
 import { patchProp } from './patch-prop';
+import './runtime/event/event-dispatcher';
 
 // 终端节点 props 类型
 export interface NativeNodeProps {

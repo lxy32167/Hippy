@@ -3,16 +3,6 @@ import type { HippyNode } from '../node/hippy-node';
 import { EventBus } from './event-bus';
 import { HippyEvent } from './hippy-event';
 
-/**
- * native事件名类似 onClick => click
- *
- * @param eventName
- */
-function getVueEventName(eventName: string) {
-  const str = eventName.slice(2);
-  return `${str.charAt(0).toLowerCase()}${str.slice(1)}`;
-}
-
 function findTargetNode(targetNodeId: number): HippyNode | null {
   const instance = getHippyCachedInstance();
 
@@ -52,8 +42,7 @@ const EventDispatcher = {
     if (!targetNode) {
       return;
     }
-    const targetEventName = getVueEventName(eventName);
-    const event = new HippyEvent(targetEventName);
+    const event = new HippyEvent(eventName);
 
     // 下发事件
     targetNode.dispatchEvent(event);

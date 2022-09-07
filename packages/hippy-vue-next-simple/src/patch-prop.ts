@@ -3,10 +3,6 @@ import { isOn } from '@vue/shared';
 // import { HippyElement } from './runtime/element/hippy-element';
 // import { HippyNode } from './runtime/node/hippy-node';
 
-function parseName(name) {
-  const str = name.slice(2);
-  return `${str.charAt(0).toLowerCase()}${str.slice(1)}`;
-}
 
 export function patchProp(
   el: any,
@@ -18,12 +14,10 @@ export function patchProp(
   // parentComponent: ComponentInternalInstance | null,
 ): void {
   if (isOn(key)) {
-    const eventName = parseName(key);
-
     if (nextValue) {
-      el.addEventListener(eventName, nextValue);
+      el.addEventListener(key, nextValue);
     } else {
-      el.removeEventListener(eventName, nextValue);
+      el.removeEventListener(key, nextValue);
     }
   } else {
     if (prevValue !== nextValue) {

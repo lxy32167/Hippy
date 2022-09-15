@@ -91,12 +91,12 @@ const aliases = {
 };
 
 const builds = {
-  '@hippy/vue': {
-    entry: resolvePackage('hippy-vue', 'src/index.js'),
-    dest: resolvePackage('hippy-vue', 'dist/index.js'),
-    format: 'es',
-    banner: banner('@hippy/vue', hippyVuePackage.version),
-  },
+  // '@hippy/vue': {
+  //   entry: resolvePackage('hippy-vue', 'src/index.js'),
+  //   dest: resolvePackage('hippy-vue', 'dist/index.js'),
+  //   format: 'es',
+  //   banner: banner('@hippy/vue', hippyVuePackage.version),
+  // },
   '@hippy/vue-css-loader': {
     entry: resolvePackage('hippy-vue-css-loader', 'src/index.js'),
     dest: resolvePackage('hippy-vue-css-loader', 'dist/index.js'),
@@ -107,20 +107,20 @@ const builds = {
       return id in Object.keys(cssLoaderPackage.dependencies);
     },
   },
-  '@hippy/vue-native-components': {
-    entry: resolvePackage('hippy-vue-native-components', 'src/index.js'),
-    dest: resolvePackage('hippy-vue-native-components', 'dist/index.js'),
-    format: 'es',
-    moduleName: 'hippy-vue-native-components',
-    banner: banner('@hippy/vue-native-components', nativeComponentsPackage.version),
-  },
-  '@hippy/vue-router': {
-    entry: resolvePackage('hippy-vue-router', 'src/index.js'),
-    dest: resolvePackage('hippy-vue-router', 'dist/index.js'),
-    format: 'es',
-    moduleName: 'hippy-vue-router',
-    banner: banner('@hippy/vue-router', routerPackage.version),
-  },
+  // '@hippy/vue-native-components': {
+  //   entry: resolvePackage('hippy-vue-native-components', 'src/index.js'),
+  //   dest: resolvePackage('hippy-vue-native-components', 'dist/index.js'),
+  //   format: 'es',
+  //   moduleName: 'hippy-vue-native-components',
+  //   banner: banner('@hippy/vue-native-components', nativeComponentsPackage.version),
+  // },
+  // '@hippy/vue-router': {
+  //   entry: resolvePackage('hippy-vue-router', 'src/index.js'),
+  //   dest: resolvePackage('hippy-vue-router', 'dist/index.js'),
+  //   format: 'es',
+  //   moduleName: 'hippy-vue-router',
+  //   banner: banner('@hippy/vue-router', routerPackage.version),
+  // },
 };
 
 function genConfig(name) {

@@ -10,9 +10,6 @@ const componentName = ['%c[native]%c', 'color: red', 'color: auto'];
 
 /**
  * 终端节点上屏
- *
- * @param nodes
- * @param operateType
  */
 export function renderToNative(nodes: Array<NativeNode>, operateType: NodeOperateType) {
   const rootViewId = getRootViewId();

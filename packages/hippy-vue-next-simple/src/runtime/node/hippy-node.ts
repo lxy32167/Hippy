@@ -14,8 +14,6 @@ export enum NodeType {
 export class HippyNode extends HippyEventTarget {
   /**
    * 获取节点唯一 id
-   *
-   * @private
    */
   private static getUniqueNodeId(): number {
     return generateUniqueId();
@@ -170,8 +168,6 @@ export class HippyNode extends HippyEventTarget {
 
   /**
    * 遍历每个节点（包括全部子节点）并执行回调
-   *
-   * @param callback
    */
   public eachNode(callback: Function) {
     if (callback) {
@@ -223,8 +219,6 @@ export class HippyNode extends HippyEventTarget {
 
   /**
    * 插入 native 节点
-   *
-   * @param child
    */
   public insertNativeNode(child: HippyNode): void {
     if (!child.isNeedInsertToNative) {
@@ -252,8 +246,6 @@ export class HippyNode extends HippyEventTarget {
 
   /**
    * 更新 native 节点
-   *
-   * @param isIncludeChild
    */
   public updateNativeNode(isIncludeChild): void {
     if (!this.isMounted) {
@@ -266,8 +258,6 @@ export class HippyNode extends HippyEventTarget {
 
   /**
    * 删除 native 节点
-   *
-   * @param child
    */
   public removeNativeNode(child: HippyNode): void {
     if (child.isMounted) {
